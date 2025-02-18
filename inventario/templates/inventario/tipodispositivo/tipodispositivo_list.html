@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Tipos de Dispositivo</title>
+</head>
+<body>
+    <h1>Lista de Tipos de Dispositivo</h1>
+    <ul>
+        {% for tipo_dispositivo in tipos_dispositivo %}
+            <li>{{ tipo_dispositivo.nombre }}</li>
+        {% empty %}
+            <li>No hay tipos de dispositivo registrados.</li>
+        {% endfor %}
+    </ul>
+    <p><a href="{% url 'inventario:tipodispositivo_new' %}">Crear Nuevo Tipo de Dispositivo</a></p>
+</body>
+</html>

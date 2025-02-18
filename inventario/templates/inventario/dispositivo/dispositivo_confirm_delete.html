@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmar Borrar Dispositivo</title>
+</head>
+<body>
+    <h1>Confirmar Borrar Dispositivo</h1>
+    <p>¿Estás seguro de que quieres borrar el dispositivo: <strong>{{ dispositivo.nomenclatura }}</strong>?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar Borrar</button>
+        <a href="{% url 'inventario:dispositivo_list' %}">Cancelar</a>
+    </form>
+</body>
+</html>

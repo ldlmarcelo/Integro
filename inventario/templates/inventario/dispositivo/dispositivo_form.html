@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario de Dispositivo</title>
+</head>
+<body>
+    <h1>Formulario de Dispositivo</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar Dispositivo</button>
+    </form>
+    <p><a href="{% url 'inventario:dispositivo_list' %}">Volver a la Lista de Dispositivos</a></p>
+</body>
+</html>
