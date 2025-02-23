@@ -1,0 +1,27 @@
+<h1>Lista de Estados</h1>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Estados</title>
+</head>
+<body>
+   
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estado in estados %}
+            <tr>
+            <td>{{ estado.nombre }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>
