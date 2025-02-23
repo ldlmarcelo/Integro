@@ -9,11 +9,12 @@ from .models import (
 
 # Register your models here.
 
+@admin.register(Gerencia)
 class GerenciaAdmin(admin.ModelAdmin):
-    list_display = ('nombre',)  # Campos a mostrar en la lista
-    list_filter = ('nombre',)   # Campos para filtrar en la barra lateral
-    search_fields = ('nombre',)  # Campos para buscar en la barra de búsqueda
-admin.site.register(Gerencia, GerenciaAdmin)
+    # list_display = ('nombre',)  # COMENTAR ESTA LÍNEA
+    # list_filter = ('nombre',)   # COMENTAR ESTA LÍNEA
+    # search_fields = ('nombre',)  # COMENTAR ESTA LÍNEA
+    pass # DEJAR SOLO EL 'pass'
 
 class CustomUserAdmin(admin.ModelAdmin):
     list_display = ('username', 'first_name', 'last_name', 'email', 'gerencia', 'is_staff', 'is_active')
