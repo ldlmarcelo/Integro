@@ -72,13 +72,3 @@ def dispositivo_list(request):
 
 def tipodispositivo_list(request):
     return HttpResponse("<h1>Lista de Tipos de Dispositivo (Placeholder)</h1>")
-
-def ubicacion_list(request):
-    ubicaciones = Ubicacion.objects.all()
-    return render(request, 'inventario/ubicacion/ubicacion_list.html', {'ubicaciones': ubicaciones})
-
-def estado_list(request):
-    estados = Estado.objects.all()  # Consulta a la base de datos para obtener TODOS los estados
-    return render(request, 'inventario/estado/estado_list.html', {
-        'estados': estados  # Pasa la lista de estados al template con la clave 'estados'
-    })

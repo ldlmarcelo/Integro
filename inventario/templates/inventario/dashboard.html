@@ -29,8 +29,8 @@
         {% if is_agente or user.is_superuser %}
             <li><a href="{% url 'inventario:dispositivo_list' %}">Gestionar Dispositivos</a></li>
             <li><a href="{% url 'inventario:tipodispositivo_list' %}">Gestionar Tipos de Dispositivo</a></li>
-            <li><a href="{% url 'inventario:ubicacion_list' %}">Gestionar Ubicaciones</a></li>
-            <li><a href="{% url 'inventario:estado_list' %}">Gestionar Estados</a></li>
+           
+            
         {% endif %}
 
         {% if is_gerente or user.is_superuser %}
