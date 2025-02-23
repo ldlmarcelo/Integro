@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Ubicaciones</title>
+</head>
+<body>
+    <h1>Lista de Ubicaciones</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Agencia</th>
+                <th>Piso</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ubicacion in ubicaciones %}
+            <tr>
+                <td>{{ ubicacion.agencia }}</td>
+                <td>{{ ubicacion.piso }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="2">No hay ubicaciones registradas.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+</html>

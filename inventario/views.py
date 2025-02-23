@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
 from django.urls import reverse_lazy
 from .forms import DispositivoForm, TipoDispositivoForm
-from .models import Dispositivo, TipoDispositivo
+from .models import Dispositivo, TipoDispositivo, Ubicacion
 
 # --- Vistas para Dispositivo ---
 class DispositivoListView(ListView):
@@ -74,7 +74,8 @@ def tipodispositivo_list(request):
     return HttpResponse("<h1>Lista de Tipos de Dispositivo (Placeholder)</h1>")
 
 def ubicacion_list(request):
-    return HttpResponse("<h1>Lista de Ubicaciones (Placeholder)</h1>")
+    ubicaciones = Ubicacion.objects.all()
+    return render(request, 'inventario/ubicacion/ubicacion_list.html', {'ubicaciones': ubicaciones})
 
 def estado_list(request):
     return HttpResponse("<h1>Lista de Estados (Placeholder)</h1>")

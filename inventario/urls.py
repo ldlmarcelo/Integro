@@ -4,7 +4,7 @@ from . import views
 app_name = 'inventario' # ¡Asegúrate de tener esta línea!
 
 urlpatterns = [
-    path('', views.dashboard_view, name='home'),   # URL para la raíz (Dashboard) - ¡AÑADIDA!
+    # path('', views.dashboard_view, name='home'),  <- ¡¡¡¡¡ELIMINA *ESTA* *LÍNEA* *COMPLETA*!!!!!
 
     # URLs para Dispositivo (Vistas basadas en clase - CBV)
     path('dispositivos/', views.DispositivoListView.as_view(), name='dispositivo_list'),
@@ -23,4 +23,5 @@ urlpatterns = [
 
     # URLs para Estado (Vistas basadas en función - FBV) - ¡AÑADIDAS!
     path('estados/', views.estado_list, name='estado_list'), # URL para la lista de estados
+
 ]
