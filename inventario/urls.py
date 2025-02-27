@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 
-app_name = 'inventario'  # Namespace para evitar conflictos
+app_name = 'inventario'
 
 urlpatterns = [
     path('cliente/dispositivos/', views.cliente_dispositivos, name='cliente_dispositivos'),
