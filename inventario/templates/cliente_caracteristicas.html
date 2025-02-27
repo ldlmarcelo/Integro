@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Características de {{ dispositivo.nomenclatura }}</title>
+</head>
+<body>
+    <h1>Características de {{ dispositivo.nomenclatura }}</h1>
+    <ul>
+    {% for caracteristica in caracteristicas %}
+        <li>{{ caracteristica.caracteristica_especifica.nombre }}: {{ caracteristica.valor }}</li>
+    {% empty %}
+        <li>No hay características registradas.</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'inventario:cliente_dispositivos' %}">Volver a Mis Dispositivos</a>
+</body>
+</html>

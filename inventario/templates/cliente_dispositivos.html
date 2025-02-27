@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mis Dispositivos</title>
+</head>
+<body>
+    <h1>Propietario: {{ email }} - Gerencia: {{ gerencia }}</h1>
+    <ul>
+    {% for dispositivo in dispositivos %}
+        <li>
+            <strong>Tipo de Dispositivo:</strong> {{ dispositivo.tipo_dispositivo.nombre }}<br>
+            <strong>Marca:</strong> {{ dispositivo.modelo.marca_id_marca.nombre|default:'-' }}<br>
+            <strong>Modelo:</strong> {{ dispositivo.modelo.nombre|default:'-' }}<br>
+            <strong>Ubicación:</strong> {{ dispositivo.ultima_ubicacion.ubicacion_id_ubicacion.agencia|default:'-' }} - {{ dispositivo.ultima_ubicacion.ubicacion_id_ubicacion.piso|default:'-' }}<br>
+            <strong>Estado:</strong> {{ dispositivo.ultimo_estado.estado_id_estado.nombre|default:'-' }}<br>
+            <strong>Características:</strong> <a href="{% url 'admin:inventario_dispositivocaracteristica_changelist' %}?dispositivo_id_dispositivo__id__exact={{ dispositivo.id }}">Ver</a><br>
+            <strong>Nro. de Serie:</strong> {{ dispositivo.serie|default:'-' }}<br>
+        </li>
+    {% empty %}
+        <li>No tenés dispositivos asignados.</li>
+    {% endfor %}
+    </ul>
+</body>
+</html>
