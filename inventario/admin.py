@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from .models import (
     Gerencia,
     CustomUser,
@@ -27,21 +28,29 @@ class GerenciaAdmin(admin.ModelAdmin):
 
 
 @admin.register(CustomUser)
-class CustomUserAdmin(admin.ModelAdmin):
+class CustomUserAdmin(UserAdmin):
     list_display = ('username', 'first_name', 'last_name', 'email', 'gerencia', 'is_staff', 'is_active')
     list_filter = ('is_staff', 'is_active', 'gerencia')
     search_fields = ('username', 'first_name', 'last_name', 'email')
+    ordering = ('username',)
+    filter_horizontal = ('groups', 'user_permissions')
+    
+    # Fieldsets para creación y edición
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         ('Información Personal', {'fields': ('first_name', 'last_name', 'email')}),
         ('Gerencia y Permisos', {'fields': ('gerencia', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Fechas importantes', {'fields': ('last_login', 'date_joined')}),
-        ('Estado', {'fields': ('is_active',)})
+        ('Estado', {'fields': ('is_active',)}),
     )
-    ordering = ('username',)
-    filter_horizontal = ('groups', 'user_permissions')
-
-
+    # Para la creación, usa los campos de UserAdmin
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'password1', 'password2', 'gerencia', 'is_staff', 'is_active'),
+        }),
+    )
+    
 @admin.register(TipoDispositivo)
 class TipoDispositivoAdmin(admin.ModelAdmin):
     list_display = ('nombre', 'descripcion', 'is_active') # Muestra 'is_active' en la lista
