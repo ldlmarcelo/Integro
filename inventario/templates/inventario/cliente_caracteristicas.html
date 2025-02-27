@@ -6,7 +6,7 @@
 <body>
     <h1>Características de {{ dispositivo.nomenclatura }}</h1>
     <ul>
-    {% for caracteristica in caracteristicas %}
+    {% for caracteristica in características %}
         <li>{{ caracteristica.caracteristica_especifica.nombre }}: {{ caracteristica.valor }}</li>
     {% empty %}
         <li>No hay características registradas.</li>

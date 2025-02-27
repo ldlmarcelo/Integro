@@ -1,10 +1,24 @@
 from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import UserPassesTestMixin
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 from .models import Dispositivo, DispositivoEstado, DispositivoUbicacion, DispositivoCaracteristica, TipoDispositivo, Modelo
 
-# Vista para el Cliente con validación de rol
+class CustomLoginView(LoginView):
+    template_name = 'inventario/login.html'
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        if self.request.user.groups.filter(name='Cliente').exists():
+            return reverse_lazy('inventario:cliente_dispositivos')
+        elif self.request.user.groups.filter(name='Gerente').exists():
+            return reverse_lazy('inventario:gerente_dispositivos')  # Pendiente
+        elif self.request.user.groups.filter(name='Agente').exists():
+            return reverse_lazy('inventario:agente_inventario')  # Pendiente
+        else:  # Admin o sin rol
+            return reverse_lazy('admin:index')
+
 class ClienteDispositivosView(UserPassesTestMixin, TemplateView):
     template_name = 'inventario/cliente_dispositivos.html'
 
@@ -20,6 +34,7 @@ class ClienteDispositivosView(UserPassesTestMixin, TemplateView):
         dispositivos_data = []
         for dispositivo in dispositivos:
             tipo = dispositivo.tipo_dispositivo
+            # Ajustamos marca y modelo si no existen en Dispositivo
             marca = tipo.modelo.marca_id_marca.nombre if hasattr(tipo, 'modelo') and tipo.modelo else '-'
             modelo = tipo.modelo.nombre if hasattr(tipo, 'modelo') and tipo.modelo else '-'
             ultimo_estado = DispositivoEstado.objects.filter(dispositivo_id_dispositivo=dispositivo).order_by('-fecha').first()
@@ -60,3 +75,10 @@ class ClienteCaracteristicasView(UserPassesTestMixin, TemplateView):
             'dispositivo': dispositivo,
             'caracteristicas': caracteristicas,
         }
+
+# Bloquea el admin para "Cliente"
+class AdminRedirectView(UserPassesTestMixin, RedirectView):
+    pattern_name = 'inventario:login'
+
+    def test_func(self):
+        return not self.request.user.groups.filter(name='Cliente').exists()
