@@ -1,8 +1,9 @@
 from django.urls import path
 from . import views
 
-app_name = 'inventario'
+app_name = 'inventario'  # Namespace para evitar conflictos
 
 urlpatterns = [
-    path('mis-dispositivos/', views.cliente_dispositivos, name='cliente_dispositivos'),
+    path('cliente/dispositivos/', views.cliente_dispositivos, name='cliente_dispositivos'),
+    path('cliente/dispositivos/<int:dispositivo_id>/caracteristicas/', views.cliente_caracteristicas, name='cliente_caracteristicas'),
 ]
