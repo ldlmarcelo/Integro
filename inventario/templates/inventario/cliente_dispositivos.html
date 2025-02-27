@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mis Dispositivos</title>
+</head>
+<body>
+    <h1>Propietario: {{ email }} - Gerencia: {{ gerencia }}</h1>
+    <h2>Mis Dispositivos</h2>
+    <ul>
+    {% for dispositivo in dispositivos %}
+        <li>
+            <strong>Tipo de Dispositivo:</strong> {{ dispositivo.tipo }}<br>
+            <strong>Marca:</strong> {{ dispositivo.marca }}<br>
+            <strong>Modelo:</strong> {{ dispositivo.modelo }}<br>
+            <strong>Ubicación:</strong> {{ dispositivo.ubicacion }}<br>
+            <strong>Estado:</strong> {{ dispositivo.estado }}<br>
+            <strong>Características:</strong> <a href="{{ dispositivo.caracteristicas_url }}">Ver</a><br>
+            <strong>Nro. de Serie:</strong> {{ dispositivo.serie }}
+        </li>
+        <hr>
+    {% empty %}
+        <li>No tenés dispositivos asignados.</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'logout' %}">Cerrar sesión</a>
+</body>
+</html>
