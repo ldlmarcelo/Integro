@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'inventario',
     'django_extensions',
+    'auth',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +126,4 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'inventario.CustomUser' #  ¡¡¡¡RECUERDA VERIFICAR EL NOMBRE DE TU APP!!!!
+LOGIN_URL = '/login/'
