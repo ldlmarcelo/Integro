@@ -9,19 +9,13 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         if self.request.user.groups.filter(name='Cliente').exists():
-            return reverse_lazy('inventario:cliente_dispositivos')
+            return '/cliente/dispositivos/'  # URL directa
         elif self.request.user.groups.filter(name='Gerente').exists():
-            return reverse_lazy('inventario:gerente_dispositivos')
+            return '/gerente/dispositivos/'  # Pendiente, URL directa
         elif self.request.user.groups.filter(name='Agente').exists():
-            return reverse_lazy('inventario:agente_inventario')
+            return '/agente/inventario/'  # Pendiente, URL directa
         else:  # Administrador o sin rol
-            return '/admin/'
+            return '/admin/'  # URL directa
 
 class LogoutRedirectView(RedirectView):
     url = '/login/'
-
-class AdminRedirectView(UserPassesTestMixin, RedirectView):
-    url = '/login/'
-
-    def test_func(self):
-        return not self.request.user.groups.filter(name__in=['Cliente', 'Gerente', 'Agente']).exists()

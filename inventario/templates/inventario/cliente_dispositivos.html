@@ -14,7 +14,7 @@
             <strong>Modelo:</strong> {{ dispositivo.modelo }}<br>
             <strong>Ubicación:</strong> {{ dispositivo.ubicacion }}<br>
             <strong>Estado:</strong> {{ dispositivo.estado }}<br>
-            <strong>Características:</strong> <a href="{{ dispositivo.caracteristicas_url }}">Ver</a><br>
+            <strong>Caracteristics:</strong> <a href="{{ dispositivo.caracteristics_url }}">Ver</a><br>
             <strong>Nro. de Serie:</strong> {{ dispositivo.serie }}
         </li>
         <hr>
@@ -22,6 +22,6 @@
         <li>No tenés dispositivos asignados.</li>
     {% endfor %}
     </ul>
-    <a href="{% url 'logout' %}">Cerrar sesión</a>
+    <a href="{% url 'custom_auth:login' %}">Cerrar sesión</a>  <!-- Namespace correcto -->
 </body>
 </html>
